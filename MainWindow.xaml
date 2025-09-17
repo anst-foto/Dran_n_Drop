@@ -16,8 +16,7 @@
             <TextBlock Text="{Binding Path=Color}"
                        Background="{Binding}"
                        Foreground="White"
-                       Width="200" Height="50"
-                       MouseDown="_MouseDown"/>
+                       Width="200" Height="50"/>
         </DataTemplate>
     </Window.Resources>
     
@@ -27,24 +26,30 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         
-        <ListBox ItemsSource="{Binding Path=ListOfColors}"
-                 ItemTemplate="{StaticResource ResourceKey=Template_ListOfColors}"
-                 Grid.Column="0"/>
+        <StackPanel Grid.Column="0" >
+            <ListBox ItemsSource="{Binding Path=ListOfColors}"
+                     ItemTemplate="{StaticResource ResourceKey=Template_ListOfColors}"
+                     SelectionMode="Single"
+                     SelectedItem="{Binding Path=SelectedColor}"/>
+            
+            <StackPanel Orientation="Vertical">
+                <CheckBox Content="Rectangle"
+                          IsChecked="{Binding Path=IsRectangle}"/>
+                <CheckBox Content="Ellipse"
+                          IsChecked="{Binding Path=IsEllipse}"/>
+            </StackPanel>
+        </StackPanel>
         
         <StackPanel Orientation="Vertical"
                     Grid.Column="1">
-            <Rectangle Fill="Transparent" 
+            <Rectangle Fill="{Binding Path=ColorRectangle}" 
                        Width="100" Height="100"
                        Stroke="Black" StrokeThickness="3"
-                       Margin="20"
-                       AllowDrop="True"
-                       Drop="_Drop"/>
-            <Ellipse Fill="White"
+                       Margin="20"/>
+            <Ellipse Fill="{Binding Path=ColorEllipse}"
                      Width="100" Height="100"
                      Stroke="Black" StrokeThickness="3"
-                     Margin="20"
-                     AllowDrop="True"
-                     Drop="_Drop"/>
+                     Margin="20"/>
         </StackPanel>
     </Grid>
 </Window>
